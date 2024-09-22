@@ -6,17 +6,20 @@ export const typeDefs = `#graphql
   }
 
   type Product {
-  id:                 ID!
-  title:              String
-  description:        String
-  price:              Int
-  discountPercentage: Int
-  rating:             Int
-  stock:              Int
-  brand:              String
-  category:           String
-  thumbnail:          String
+    id: ID!
+    name: String
+    image: String
+    description: String
+    price: Float
+    quantity: Int
+    onStock: Boolean
+    categoryId: String
 }
+
+  type Category {
+    id: ID!
+    name: String
+  }
 
 
   type User{
@@ -30,6 +33,8 @@ export const typeDefs = `#graphql
     books: [Book]
     users: [User]
     products: [Product]
+    categories: [Category]
+    category(categoryId: ID!): Category
     product(productId: ID!): Product
   }
 `;
