@@ -20,20 +20,24 @@ export const resolvers = {
     },
   },
   Product: {
-    category: (parent: any, _args: any, _context: any) => {
+    category: ({ categoryId }, _args: any, _context: any) => {
       // console.log(parent.categoryId);
       const result = db.products.find(
-        (product) => product.categoryId === parent.categoryId
+        (product) => product.categoryId === categoryId
+      );
+      return result;
+    },
+    reviews: (parent: any, _args: any, _context: any) => {
+      const result = db.reviews.filter(
+        (review) => review.productId === parent.id
       );
       return result;
     },
   },
   Category: {
-    products: (parent, args, context) => {
-      console.log(parent);
-      const result = db.products.filter(
-        (product) => product.categoryId === parent.id
-      );
+    products: ({ id }, _args: any, _context: any) => {
+      // console.log(parent);
+      const result = db.products.filter((product) => product.categoryId === id);
       return result;
     },
   },
